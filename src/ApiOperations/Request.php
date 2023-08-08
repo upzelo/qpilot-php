@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Recharge\ApiOperations;
+namespace Qpilot\ApiOperations;
 
-use Recharge\RechargeEnum;
-use Recharge\ApiRequestor;
+use Qpilot\QpilotEnum;
+use Qpilot\ApiRequestor;
 
 trait Request
 {
@@ -18,8 +18,7 @@ trait Request
 
     protected static function _staticRequest($method, $url, $params = [])
     {
-        $baseUrl = RechargeEnum::DEFAULT_API_BASE->value;
-
+        $baseUrl = QpilotEnum::DEFAULT_API_BASE->value;
         $requestor = new ApiRequestor('key', $baseUrl);
 
         return $requestor->request($method, $url, $params);

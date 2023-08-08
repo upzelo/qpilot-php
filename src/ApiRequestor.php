@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Recharge;
+namespace Qpilot;
 
 use GuzzleHttp\Client;
 
@@ -22,10 +22,10 @@ class ApiRequestor
         self::$httpClient = new Client([
             'base_uri' => $this->apiBase,
             'headers' => [
-                'Authorization' => 'Bearer ' . $this->apiKey,
+                'Authorization' => 'Bearer ' . $this->config['client_id'] . ";" . $this->apiKey,
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
-                'X-Recharge-Version' => $this->config['recharge_version'],
+                'X-Qpilot-Version' => $this->config['Qpilot_version'],
                 ...$headers,
             ],
         ]);
@@ -53,10 +53,10 @@ class ApiRequestor
             self::$httpClient = new Client([
                 'base_uri' => $this->apiBase,
                 'headers' => [
-                    'Authorization' => 'Bearer ' . $this->apiKey,
+                    'Authorization' => 'Bearer ' . $this->config['client_id'] . ";" . $this->apiKey,
                     'Accept' => 'application/json',
                     'Content-Type' => 'application/json',
-                    'X-Recharge-Version' => '2021-11',
+                    'X-Qpilot-Version' => $this->config['Qpilot_version'],
                 ],
             ]);
         }

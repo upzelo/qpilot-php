@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Recharge\Services;
+namespace Qpilot\Services;
 
-use Recharge\Customer;
-use Recharge\Collection;
+use Qpilot\Customer;
+use Qpilot\Collection;
 
 class CustomerService extends AbstractService
 {
@@ -16,7 +16,7 @@ class CustomerService extends AbstractService
      *
      * @return Collection<Customer>
      */
-    public function all(?array $params = null)
+    public function all(?array $params = null): Collection
     {
         return $this->requestCollection('get', '/customers', $params, self::OBJECT_TYPE);
     }

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Recharge\Helpers;
+namespace Qpilot\Helpers;
 
-use Recharge\RechargeObject;
+use Qpilot\QpilotObject;
 
 abstract class Util
 {
@@ -121,19 +121,20 @@ abstract class Util
         return $h;
     }
 
-    public static function convertToRechargeObject($resp)
+    public static function convertToQpilotObject($resp)
     {
         $types = ObjectTypes::MAPPING;
         if (self::isList($resp)) {
             $mapped = [];
             foreach ($resp as $i) {
-                $mapped[] = self::convertToRechargeObject($i);
+                $mapped[] = self::convertToQpilotObject($i);
             }
 
             return $mapped;
         }
         if (\is_array($resp)) {
-            $class = $types[$resp['object'] ?? null] ?? RechargeObject::class;
+            //Allow object of item, where no mapping found
+            $class = $types[$resp['object'] ?? 'item'] ?? QpilotObject::class;
 
             return $class::constructFrom($resp);
         }

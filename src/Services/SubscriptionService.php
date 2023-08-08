@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Recharge\Services;
+namespace Qpilot\Services;
 
-use Recharge\Collection;
-use Recharge\Subscription;
+use Qpilot\Collection;
+use Qpilot\Subscription;
 
 class SubscriptionService extends AbstractService
 {
@@ -13,22 +13,21 @@ class SubscriptionService extends AbstractService
 
     public function all(?array $params = []): Collection
     {
-        return $this->requestCollection('get', 'subscriptions', $params, self::OBJECT_TYPE);
+        return $this->requestCollection('get', '/ScheduledOrders', $params, self::OBJECT_TYPE);
     }
 
     public function retrieve($id): Subscription
     {
-        return $this->request('get', $this->buildPath('/subscriptions/%s', $id), [], self::OBJECT_TYPE);
+        return $this->request('get', $this->buildPath('/ScheduledOrders/%s', $id), [], self::OBJECT_TYPE);
     }
 
     public function cancel($id, $params = []): Subscription
     {
-        return $this->request('post', $this->buildPath('/subscriptions/%s/cancel', $id), $params, self::OBJECT_TYPE);
+        return $this->request('post', $this->buildPath('/ScheduledOrders/%s/cancel', $id), $params, self::OBJECT_TYPE);
     }
 
-    /*https://developer.rechargepayments.com/2021-11/subscriptions/subscriptions_activate*/
     public function activate($id, $params = []): Subscription
     {
-        return $this->request('post', $this->buildPath('/subscriptions/%s/activate', $id), $params, self::OBJECT_TYPE);
+        return $this->request('post', $this->buildPath('/ScheduledOrders/%s/activate', $id), $params, self::OBJECT_TYPE);
     }
 }

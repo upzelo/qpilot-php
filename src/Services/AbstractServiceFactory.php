@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Recharge\Services;
+namespace Qpilot\Services;
 
-use Recharge\Contracts\RechargeClientInterface;
+use Qpilot\Contracts\QpilotClientInterface;
 
 use function trigger_error;
 use function array_key_exists;
@@ -13,7 +13,7 @@ abstract class AbstractServiceFactory
 {
     private array $services = [];
 
-    public function __construct(private RechargeClientInterface $client)
+    public function __construct(private QpilotClientInterface $client)
     {
     }
 

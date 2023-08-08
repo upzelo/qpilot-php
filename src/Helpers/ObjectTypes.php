@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Recharge\Helpers;
+namespace Qpilot\Helpers;
 
-use Recharge\Plan;
-use Recharge\Shop;
-use Recharge\Order;
-use Recharge\Charge;
-use Recharge\Product;
-use Recharge\Webhook;
-use Recharge\Customer;
-use Recharge\Discount;
-use Recharge\Collection;
-use Recharge\Subscription;
-use Recharge\Address;
+use Qpilot\Plan;
+use Qpilot\Shop;
+use Qpilot\Order;
+use Qpilot\Charge;
+use Qpilot\Product;
+use Qpilot\Webhook;
+use Qpilot\Customer;
+use Qpilot\Discount;
+use Qpilot\Collection;
+use Qpilot\Subscription;
+use Qpilot\Address;
 
 class ObjectTypes
 {

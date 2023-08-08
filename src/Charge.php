@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Recharge;
+namespace Qpilot;
 
 class Charge extends ApiResource
 {

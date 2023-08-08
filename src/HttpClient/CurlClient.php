@@ -1,6 +1,6 @@
 <?php
 
-namespace Recharge\HttpClient;
+namespace Qpilot\HttpClient;
 
 use Stripe\Exception;
 use Stripe\Stripe;

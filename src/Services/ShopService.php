@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Recharge\Services;
+namespace Qpilot\Services;
 
-use Recharge\Shop;
+use Qpilot\Shop;
 
 class ShopService extends AbstractService
 {

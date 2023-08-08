@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Recharge\Helpers;
+namespace Qpilot\Helpers;
 
 use ArrayIterator;
 use IteratorAggregate;

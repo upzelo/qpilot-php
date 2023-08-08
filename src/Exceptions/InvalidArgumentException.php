@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Recharge\Exceptions;
+namespace Qpilot\Exceptions;
 
 class InvalidArgumentException extends \InvalidArgumentException
 {

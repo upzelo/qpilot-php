@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Recharge\Services;
+namespace Qpilot\Services;
 
-use Recharge\Order;
+use Qpilot\Order;
 
 class OrderService extends AbstractService
 {
     public const OBJECT_TYPE = 'order';
 
-    public function all(?array $params = null): \Recharge\Collection
+    public function all(?array $params = null): \Qpilot\Collection
     {
         return $this->requestCollection('get', '/orders', $params, self::OBJECT_TYPE);
     }

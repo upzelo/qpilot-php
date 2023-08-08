@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Recharge;
+namespace Qpilot;
 
-use Recharge\Helpers\Set;
+use Qpilot\Helpers\Set;
 use ReturnTypeWillChange;
-use Recharge\Helpers\Util;
+use Qpilot\Helpers\Util;
 
 use function substr;
 use function is_array;
@@ -16,7 +16,7 @@ use function array_keys;
 use function array_reduce;
 use function method_exists;
 
-class RechargeObject implements \ArrayAccess, \Countable, \JsonSerializable
+class QpilotObject implements \ArrayAccess, \Countable, \JsonSerializable
 {
     protected array $values = [];
 
@@ -58,7 +58,7 @@ class RechargeObject implements \ArrayAccess, \Countable, \JsonSerializable
             return $copy;
         }
 
-        if ($object instanceof RechargeObject) {
+        if ($object instanceof QpilotObject) {
             return $object::constructFrom(
                 self::deepCopy($object->values),
             );
@@ -101,7 +101,7 @@ class RechargeObject implements \ArrayAccess, \Countable, \JsonSerializable
     {
         $this->originalValues = self::deepCopy($values);
 
-        if ($values instanceof RechargeObject) {
+        if ($values instanceof QpilotObject) {
             $values = $values->toArray();
         }
 
@@ -127,7 +127,7 @@ class RechargeObject implements \ArrayAccess, \Countable, \JsonSerializable
             if (('metadata' === $key) && (\is_array($value))) {
                 $this->values[$key] = self::constructFrom($value);
             } else {
-                $this->values[$key] = Util::convertToRechargeObject($value);
+                $this->values[$key] = Util::convertToQpilotObject($value);
             }
 
             if ($dirty) {
@@ -153,7 +153,7 @@ class RechargeObject implements \ArrayAccess, \Countable, \JsonSerializable
                 $this->dirtyValue($v);
             }
         } elseif (is_object($value)) {
-            if ($value instanceof RechargeObject) {
+            if ($value instanceof QpilotObject) {
                 $value->dirty();
             }
         }
@@ -172,7 +172,7 @@ class RechargeObject implements \ArrayAccess, \Countable, \JsonSerializable
 
     public function __set($key, $value)
     {
-        $this->values[$key] = Util::convertToRechargeObject($value);
+        $this->values[$key] = Util::convertToQpilotObject($value);
         $this->dirtyValue($this->values[$key]);
         $this->unsavedValues->add($key);
     }

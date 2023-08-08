@@ -1,7 +1,12 @@
 {
-    "name": "upzelo/recharge-payments",
-    "description": "Recharge Payments Library",
-    "keywords": ["php", "recharge", "recharge-payments", "rechargepayments"],
+    "name": "upzelo/qpilot",
+    "description": "Qpilot / Autoship Library",
+    "keywords": [
+        "php",
+        "qpilot",
+        "autoship",
+        "qpilot cloud api"
+    ],
     "license": "MIT",
     "authors": [
         {
@@ -22,7 +27,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Recharge\\": "src/"
+            "Qpilot\\": "src/"
         }
     },
     "autoload-dev": {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Recharge\Services;
+namespace Qpilot\Services;
 
 /**
  * @property CustomerService $customer

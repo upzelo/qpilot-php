@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Recharge;
+namespace Qpilot;
 
 use Traversable;
-use Recharge\ApiOperations\Request;
+use Qpilot\ApiOperations\Request;
 
 /**
- * @template TRechargeObject of RechargeObject
- * @template-implements \IteratorAggregate<TRechargeObject>
+ * @template TQpilotObject of QpilotObject
+ * @template-implements \IteratorAggregate<TQpilotObject>
  *
  * @property bool              $has_more
  * @property ?string           $next_cursor
  * @property ?string           $previous_cursor
- * @property TRechargeObject[] $data
+ * @property TQpilotObject[] $data
  */
-class Collection extends RechargeObject implements \Countable, \IteratorAggregate
+class Collection extends QpilotObject implements \Countable, \IteratorAggregate
 {
     use Request;
     public const OBJECT_NAME = 'list';

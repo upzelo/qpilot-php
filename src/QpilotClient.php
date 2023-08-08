@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Recharge;
+namespace Qpilot;
 
-use Recharge\Services\PlanService;
-use Recharge\Services\ShopService;
-use Recharge\Services\OrderService;
-use Recharge\Services\ChargeService;
-use Recharge\Services\ServiceFactory;
-use Recharge\Services\ProductService;
-use Recharge\Services\WebhookService;
-use Recharge\Services\AddressService;
-use Recharge\Services\CustomerService;
-use Recharge\Services\DiscountService;
-use Recharge\Services\SubscriptionService;
+use Qpilot\Services\PlanService;
+use Qpilot\Services\ShopService;
+use Qpilot\Services\OrderService;
+use Qpilot\Services\ChargeService;
+use Qpilot\Services\ServiceFactory;
+use Qpilot\Services\ProductService;
+use Qpilot\Services\WebhookService;
+use Qpilot\Services\AddressService;
+use Qpilot\Services\CustomerService;
+use Qpilot\Services\DiscountService;
+use Qpilot\Services\SubscriptionService;
 
 /**
  * @property AddressService      $address
@@ -28,7 +28,7 @@ use Recharge\Services\SubscriptionService;
  * @property SubscriptionService $subscription
  * @property WebhookService      $webhook
  */
-class RechargeClient extends BaseRechargeClient
+class QpilotClient extends BaseQpilotClient
 {
     private ?ServiceFactory $serviceFactory = null;
 

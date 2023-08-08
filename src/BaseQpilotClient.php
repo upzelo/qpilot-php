@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Recharge;
+namespace Qpilot;
 
-use Recharge\Helpers\Util;
-use Recharge\Contracts\RechargeClientInterface;
-use Recharge\Exceptions\InvalidArgumentException;
+use Qpilot\Helpers\Util;
+use Qpilot\Contracts\QpilotClientInterface;
+use Qpilot\Exceptions\InvalidArgumentException;
 
 use function is_string;
 use function preg_match;
 use function array_merge;
 
-class BaseRechargeClient implements RechargeClientInterface
+class BaseQpilotClient implements QpilotClientInterface
 {
     /**
-     * @var array<string, string|RechargeEnum::DEFAULT_API_VERSION|RechargeEnum::DEFAULT_API_BASE|null>
+     * @var array<string, string|QpilotEnum::DEFAULT_API_VERSION|QpilotEnum::DEFAULT_API_BASE|null>
      */
     private array $config;
 
@@ -44,6 +44,11 @@ class BaseRechargeClient implements RechargeClientInterface
         return $this->config['client_id'];
     }
 
+    public function getSiteId(): mixed
+    {
+        return $this->config['site_id'];
+    }
+
     public function getApiBase(): ?string
     {
         return $this->config['api_base'];
@@ -52,14 +57,15 @@ class BaseRechargeClient implements RechargeClientInterface
     public function request($method, $path, $params, string $objectType, bool $isList = false)
     {
         $baseUrl = $this->getApiBase();
-
+        $path = "Sites/" . $this->getSiteId() . $path;
         $requestor = new ApiRequestor($this->getApiKey(), $baseUrl, $this->config);
+
         $response = $requestor->request($method, $path, $params);
 
         // Fix the api response to make live easier for processing.
         $fixedResponse = $this->formatApiResponse($response->json, $objectType, $isList);
 
-        $obj = Util::convertToRechargeObject($fixedResponse);
+        $obj = Util::convertToQpilotObject($fixedResponse);
         $obj->setLastResponse($response);
 
         return $obj;
@@ -75,7 +81,7 @@ class BaseRechargeClient implements RechargeClientInterface
         $resp['object'] = $isList ? 'list' : $type;
 
         if (!$isList) {
-            $data = $response[$type] ?? [];
+            $data = $response['item'] ?? [];
 
             return [...$data, ...$resp];
         }
@@ -87,10 +93,11 @@ class BaseRechargeClient implements RechargeClientInterface
         // @TODO: add some handling here for pluralising some words...
 
         $data = array_map(function ($item) use ($type) {
+
             $item['object'] = $type;
 
             return $item;
-        }, $response[$type . 's']);
+        }, $response['items']);
 
         $resp['data'] = $data;
 
@@ -119,13 +126,13 @@ class BaseRechargeClient implements RechargeClientInterface
         return [
             'api_key' => null,
             'client_id' => null,
-            'recharge_version' => RechargeEnum::DEFAULT_API_VERSION->value,
-            'api_base' => RechargeEnum::DEFAULT_API_BASE->value,
+            'Qpilot_version' => QpilotEnum::DEFAULT_API_VERSION->value,
+            'api_base' => QpilotEnum::DEFAULT_API_BASE->value,
         ];
     }
 
     /**
-     * @param array<string, string|RechargeEnum::DEFAULT_API_VERSION|RechargeEnum::DEFAULT_API_BASE|null> $config
+     * @param array<string, string|QpilotEnum::DEFAULT_API_VERSION|QpilotEnum::DEFAULT_API_BASE|null> $config
      */
     private function validateConfig(array $config): void
     {
@@ -142,6 +149,11 @@ class BaseRechargeClient implements RechargeClientInterface
             if (preg_match('/\s/', $config['api_key'])) {
                 throw new InvalidArgumentException('The api_key must not contain whitespace.');
             }
+        }
+
+        // check client_id / site id
+        if (null !== $config['client_id'] && !\is_string($config['client_id'])) {
+            throw new InvalidArgumentException('client_id must be null or a string');
         }
     }
 }

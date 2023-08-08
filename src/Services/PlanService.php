@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Recharge\Services;
+namespace Qpilot\Services;
 
-use Recharge\Collection;
+use Qpilot\Collection;
 
 class PlanService extends AbstractService
 {

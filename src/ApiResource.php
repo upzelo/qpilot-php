@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Recharge;
+namespace Qpilot;
 
-class ApiResource extends RechargeObject
+class ApiResource extends QpilotObject
 {
     public function __set($key, $value): void
     {

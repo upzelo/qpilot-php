@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Recharge\Services;
+namespace Qpilot\Services;
 
-use Recharge\Webhook;
-use Recharge\Collection;
+use Qpilot\Webhook;
+use Qpilot\Collection;
 
 class WebhookService extends AbstractService
 {

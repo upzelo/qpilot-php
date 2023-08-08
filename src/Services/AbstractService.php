@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Recharge\Services;
+namespace Qpilot\Services;
 
-use Recharge\Contracts\RechargeClientInterface;
-use Recharge\Exceptions\InvalidArgumentException;
+use Qpilot\Contracts\QpilotClientInterface;
+use Qpilot\Exceptions\InvalidArgumentException;
 
 use function trim;
 use function sprintf;
@@ -13,11 +13,11 @@ use function array_map;
 
 abstract class AbstractService
 {
-    public function __construct(protected RechargeClientInterface $client)
+    public function __construct(protected QpilotClientInterface $client)
     {
     }
 
-    public function getClient(): RechargeClientInterface
+    public function getClient(): QpilotClientInterface
     {
         return $this->client;
     }

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Recharge\Services;
+namespace Qpilot\Services;
 
-use Recharge\Product;
-use Recharge\Collection;
+use Qpilot\Product;
+use Qpilot\Collection;
 
 class ProductService extends AbstractService
 {
@@ -13,11 +13,11 @@ class ProductService extends AbstractService
 
     public function all(?array $params = []): Collection
     {
-        return $this->requestCollection('get', 'products', $params, self::OBJECT_TYPE);
+        return $this->requestCollection('get', '/Products', $params, self::OBJECT_TYPE);
     }
 
     public function retrieve($id): Product
     {
-        return $this->request('get', $this->buildPath('/products/%s', $id), [], self::OBJECT_TYPE);
+        return $this->request('get', $this->buildPath('/Products/%s', $id), [], self::OBJECT_TYPE);
     }
 }

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Recharge\Contracts;
+namespace Qpilot\Contracts;
 
-interface RechargeClientInterface extends BaseRechargeClientInterface
+interface QpilotClientInterface extends BaseQpilotClientInterface
 {
     public function request($method, $path, $params, string $objectType, bool $isList = false);
 }

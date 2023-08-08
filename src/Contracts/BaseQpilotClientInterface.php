@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Recharge\Contracts;
+namespace Qpilot\Contracts;
 
-interface BaseRechargeClientInterface
+interface BaseQpilotClientInterface
 {
     public function getApiKey();
 
     public function getClientId();
+
+    public function getSiteId();
 
     public function getApiBase();
 }

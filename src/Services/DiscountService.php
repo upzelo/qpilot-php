@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Recharge\Services;
+namespace Qpilot\Services;
 
-use Recharge\Discount;
-use Recharge\Collection;
+use Qpilot\Discount;
+use Qpilot\Collection;
 
 class DiscountService extends AbstractService
 {
@@ -13,26 +13,26 @@ class DiscountService extends AbstractService
 
     public function all(?array $params = []): Collection
     {
-        return $this->requestCollection('get', 'discounts', $params, self::OBJECT_TYPE);
+        return $this->requestCollection('get', '/Coupons', $params, self::OBJECT_TYPE);
     }
 
     public function create(?array $params = []): Discount
     {
-        return $this->request('post', 'discounts', $params, self::OBJECT_TYPE);
+        return $this->request('post', '/Coupons', $params, self::OBJECT_TYPE);
     }
 
     public function retrieve($id): Discount
     {
-        return $this->request('get', $this->buildPath('/discounts/%s', $id), [], self::OBJECT_TYPE);
+        return $this->request('get', $this->buildPath('/Coupons/%s', $id), [], self::OBJECT_TYPE);
     }
 
     public function delete($id): Discount
     {
-        return $this->request('delete', $this->buildPath('/discounts/%s', $id), [], self::OBJECT_TYPE);
+        return $this->request('delete', $this->buildPath('/Coupons/%s', $id), [], self::OBJECT_TYPE);
     }
 
     public function update($id, array $params = []): Discount
     {
-        return $this->request('put', $this->buildPath('/discounts/%s', $id), $params, self::OBJECT_TYPE);
+        return $this->request('put', $this->buildPath('/Coupons/%s', $id), $params, self::OBJECT_TYPE);
     }
 }
