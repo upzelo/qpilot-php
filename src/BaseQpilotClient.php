@@ -81,7 +81,7 @@ class BaseQpilotClient implements QpilotClientInterface
         $resp['object'] = $isList ? 'list' : $type;
 
         if (!$isList) {
-            $data = $response['item'] ?? [];
+            $data = $response['item'] ?? $response ?? [];
 
             return [...$data, ...$resp];
         }
@@ -126,6 +126,7 @@ class BaseQpilotClient implements QpilotClientInterface
         return [
             'api_key' => null,
             'client_id' => null,
+            'site_id' => null,
             'Qpilot_version' => QpilotEnum::DEFAULT_API_VERSION->value,
             'api_base' => QpilotEnum::DEFAULT_API_BASE->value,
         ];
