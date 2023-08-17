@@ -10,6 +10,8 @@ use Qpilot\Subscription;
 class SubscriptionService extends AbstractService
 {
     public const OBJECT_TYPE = 'subscription';
+    public const PAUSED = 'Paused';
+    public const ACTIVE = 'Active';
 
     public function all(?array $params = []): Collection
     {
@@ -33,27 +35,46 @@ class SubscriptionService extends AbstractService
 
     public function applyDiscount($id, array $params = []): Subscription
     {
-        \Log::info('applyDiscount', ['params' => $params]);
         return $this->request('put', $this->buildPath('/ScheduledOrders/%s/', $id), $params, self::OBJECT_TYPE);
     }
 
-    public function skip($id, $subscriptionIds): Charge
+    public function pause(int|string $id): Subscription
     {
         return $this->request(
-            'post',
-            $this->buildPath('/ScheduledOrders/%s/skip', $id),
-            ['subscription_ids' => $subscriptionIds],
-            self::OBJECT_TYPE
+            'put',
+            $this->buildPath('/ScheduledOrders/%s', $id),
+            ['status' => self::PAUSED],
+            self::OBJECT_TYPE,
         );
     }
 
-    public function unSkip($id, $subscriptionIds): Charge
+    public function resume(int|string $id): Subscription
     {
         return $this->request(
-            'post',
-            $this->buildPath('/ScheduledOrders/%s/unskip', $id),
-            ['subscription_ids' => $subscriptionIds],
-            self::OBJECT_TYPE
+            'put',
+            $this->buildPath('/ScheduledOrders/%s', $id),
+            ['status' => self::ACTIVE],
+            self::OBJECT_TYPE,
         );
     }
+
+//    public function skip($id, $subscriptionIds): Charge
+//    {
+//        return $this->request(
+//            'post',
+//            $this->buildPath('/ScheduledOrders/%s/skip', $id),
+//            ['subscription_ids' => $subscriptionIds],
+//            self::OBJECT_TYPE
+//        );
+//    }
+//
+//    public function unSkip($id, $subscriptionIds): Charge
+//    {
+//        return $this->request(
+//            'post',
+//            $this->buildPath('/ScheduledOrders/%s/unskip', $id),
+//            ['subscription_ids' => $subscriptionIds],
+//            self::OBJECT_TYPE
+//        );
+//    }
 }
