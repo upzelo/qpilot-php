@@ -50,11 +50,10 @@ class SubscriptionService extends AbstractService
 
     public function reschedule(int|string $id, array $params = []): Subscription
     {
-        \Log::info($this->buildPath('/ScheduledOrders/%s/%s', $id, $params['date']));
         return $this->request(
             'put',
-            $this->buildPath('/ScheduledOrders/%s/%s', $id, $params['date']),
-            [],
+            $this->buildPath('/ScheduledOrders/%s/NextOccurrenceUtc', $id),
+            $params,
             self::OBJECT_TYPE,
         );
     }
