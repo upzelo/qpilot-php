@@ -32,7 +32,7 @@ abstract class AbstractService
         return $this->getClient()->requestCollection($method, $path, $params, $objectType);
     }
 
-    protected function buildPath(string $basepath, ...$ids, $string): string
+    protected function buildPath(string $basepath, ...$ids): string
     {
         foreach ($ids as $id) {
             if (null === $id || (\is_string($id) && '' === trim($id))) {
@@ -40,6 +40,6 @@ abstract class AbstractService
             }
         }
 
-        return sprintf($basepath, ...array_map('urlencode', $ids), $string);
+        return sprintf($basepath, ...array_map('urlencode', $ids));
     }
 }
