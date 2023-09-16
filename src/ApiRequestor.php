@@ -22,7 +22,7 @@ class ApiRequestor
         self::$httpClient = new Client([
             'base_uri' => $this->apiBase,
             'headers' => [
-                'Authorization' => 'Bearer ' . $this->config['client_id'] . ";" . $this->apiKey,
+                'Authorization' => 'qpilot-apikey ' . $this->config['site_id'] . ";" . $this->apiKey,
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
                 'X-Qpilot-Version' => $this->config['Qpilot_version'],
@@ -53,7 +53,7 @@ class ApiRequestor
             self::$httpClient = new Client([
                 'base_uri' => $this->apiBase,
                 'headers' => [
-                    'Authorization' => 'Bearer ' . $this->config['client_id'] . ";" . $this->apiKey,
+                    'Authorization' => 'qpilot-apikey ' . $this->config['site_id'] . ";" . $this->apiKey,
                     'Accept' => 'application/json',
                     'Content-Type' => 'application/json',
                     'X-Qpilot-Version' => $this->config['Qpilot_version'],
