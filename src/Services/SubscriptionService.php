@@ -33,13 +33,13 @@ class SubscriptionService extends AbstractService
         return $this->request('put', $this->buildPath('/ScheduledOrders/%s/', $id), $subscription, self::OBJECT_TYPE);
     }
 
-    //No longer used from here down
-    public function applyDiscount($id, Subscription $subscription): Subscription
+    //No longer used from here down, can be removed
+    public function applyDiscount($id, array $params = []): Subscription
     {
-        return $this->request('put', $this->buildPath('/ScheduledOrders/%s/', $id), $subscription, self::OBJECT_TYPE);
+        return $this->request('put', $this->buildPath('/ScheduledOrders/%s/', $id), $params, self::OBJECT_TYPE);
     }
 
-    public function pause(int|string $id, Subscription $subscription): Subscription
+    public function pause(int|string $id): Subscription
     {
         return $this->request(
             'put',
