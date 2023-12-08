@@ -28,11 +28,12 @@ class SubscriptionService extends AbstractService
         return $this->request('delete', $this->buildPath('/ScheduledOrders/%s/', $id), $params, self::OBJECT_TYPE);
     }
 
-    public function activate($id, $params = []): Subscription
+    public function update($id, Subscription $subscription): Subscription
     {
-        return $this->request('put', $this->buildPath('/ScheduledOrders/%s/Status/Active', $id), $params, self::OBJECT_TYPE);
+        return $this->request('put', $this->buildPath('/ScheduledOrders/%s/', $id), $subscription, self::OBJECT_TYPE);
     }
 
+    //No longer used from here down, can be removed
     public function applyDiscount($id, array $params = []): Subscription
     {
         return $this->request('put', $this->buildPath('/ScheduledOrders/%s/', $id), $params, self::OBJECT_TYPE);
@@ -48,43 +49,4 @@ class SubscriptionService extends AbstractService
         );
     }
 
-    public function reschedule(int|string $id, array $params = []): Subscription
-    {
-        return $this->request(
-            'put',
-            $this->buildPath('/ScheduledOrders/%s/NextOccurrenceUtc', $id),
-            $params,
-            self::OBJECT_TYPE,
-        );
-    }
-
-    public function resume(int|string $id): Subscription
-    {
-        return $this->request(
-            'put',
-            $this->buildPath('/ScheduledOrders/%s', $id),
-            ['status' => self::ACTIVE],
-            self::OBJECT_TYPE,
-        );
-    }
-
-//    public function skip($id, $subscriptionIds): Charge
-//    {
-//        return $this->request(
-//            'post',
-//            $this->buildPath('/ScheduledOrders/%s/skip', $id),
-//            ['subscription_ids' => $subscriptionIds],
-//            self::OBJECT_TYPE
-//        );
-//    }
-//
-//    public function unSkip($id, $subscriptionIds): Charge
-//    {
-//        return $this->request(
-//            'post',
-//            $this->buildPath('/ScheduledOrders/%s/unskip', $id),
-//            ['subscription_ids' => $subscriptionIds],
-//            self::OBJECT_TYPE
-//        );
-//    }
 }
